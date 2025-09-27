@@ -17,7 +17,7 @@ OAC (Origin Access Control) ensures CloudFront-only access
 
 I purchased ishwarbhumbak.com via Route 53 ($15 + tax = $17.70).
 
-You can buy .in domains for ~$8.
+You can buy .in domains for ~$8 + tax.
 
 If the domain is purchased outside AWS → update the registrar’s nameservers to Route 53.
 
@@ -46,17 +46,21 @@ No need to make files public.
 
 🔹 4. Create ACM Certificate
 
-Go to ACM (N. Virginia / us-east-1)
+Go to ACM (N. Virginia / us-east-1).
 
 Request a public certificate for:
 
-ishwarbhumbak.com
+ishwarbhumbak.com ✅ (root domain)
 
-www.ishwarbhumbak.com
+*.ishwarbhumbak.com ✅ (all subdomains, e.g., www, app, etc.)
 
 Validate with DNS CNAME in Route 53.
 
-Wait for status = Issued.
+Wait until status = Issued.
+
+Note: A wildcard certificate (*.ishwarbhumbak.com) does NOT cover the root domain (ishwarbhumbak.com).
+To secure both the root domain and all subdomains, include both ishwarbhumbak.com and *.ishwarbhumbak.com when requesting the certificate.
+Once issued, this single certificate will work for www.ishwarbhumbak.com, other subdomains, and the root domain.
 
 🔹 5. Create CloudFront Distribution
 
